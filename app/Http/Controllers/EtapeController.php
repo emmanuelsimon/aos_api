@@ -11,6 +11,11 @@ class EtapeController extends Controller
         return Etape::all();
     }
 
+    public function show(Request $request, $id) {
+        $etape = Etape::find($id)->first();
+        return $etape;
+    }
+
     public function store(Request $request) {
         $inputs = $request->input();
         $etape = New Etape();

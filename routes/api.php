@@ -18,6 +18,7 @@ Route::post('login', 'API\UserController@userLogin');
 Route::post('register', 'API\UserController@userRegister');
 Route::group(['middleware' => 'auth:api'], function(){
    Route::get('etapes', 'EtapeController@index')->middleware('cors');
+   Route::get('etapes/{id}', 'EtapeController@show')->middleware('cors');
    //Route::post('etapes', 'EtapeController@store')->middleware('cors');
 });
 

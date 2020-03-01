@@ -17,10 +17,11 @@ class CreateDepensesTable extends Migration
             $table->bigIncrements('id');
             $table->string('libelle');
             $table->unsignedBigInteger('etape_id');
-            $table->unsignedBigInteger('categorie_depenses_id');
-            $table->string('observation');
-            $table->text('commentaires');
-            $table->boolean('isPaid');
+            $table->unsignedBigInteger('categorie_depenses_id')->nullable();
+            $table->string('observation')->nullable();
+            $table->text('commentaires')->nullable();
+            $table->decimal('cout', 10,2)->nullable();
+            $table->decimal('paye', 10,2)->default(0);
             $table->foreign('etape_id')
                 ->references('id')
                 ->on('etapes');
