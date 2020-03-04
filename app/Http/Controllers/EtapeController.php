@@ -11,8 +11,9 @@ class EtapeController extends Controller
         return Etape::all();
     }
 
-    public function show(Request $request, $id) {
-        $etape = Etape::find($id)->first();
+    public function show($id) {
+        $etape = Etape::with('depenses')->where('id', $id)->first();
+
         return $etape;
     }
 
