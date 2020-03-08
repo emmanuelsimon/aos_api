@@ -20,6 +20,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('etapes', 'EtapeController@index')->middleware('cors');
     Route::get('etapes/{id}', 'EtapeController@show')->middleware('cors');
     Route::post('etapes', 'EtapeController@store')->middleware('cors');
+    Route::get('categorieDepense', 'CategorieDepenseController@index')->middleware('cors');
+    Route::post('depenses', 'DepenseController@store')->middleware('cors');
 });
 
 

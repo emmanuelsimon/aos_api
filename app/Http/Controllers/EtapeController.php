@@ -12,7 +12,9 @@ class EtapeController extends Controller
     }
 
     public function show($id) {
-        $etape = Etape::with('depenses')->where('id', $id)->first();
+        $etape = Etape::with(['depenses' => function($query){
+            $query->with('CategorieDepense');
+        }])->where('id', $id)->first();
 
         return $etape;
     }

@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Depense extends Model
 {
+
     protected $fillable = ['libelle', 'etape_id', 'categorie_depenses_id', 'observation', 'commentaires', 'cout',
         'paye'];
 
     public function CategorieDepense() {
-        return $this->belongsTo(CategorieDepense::class);
+        return $this->belongsTo(CategorieDepense::class, 'categore_depenses_id');
     }
 
     public function Etape() {
