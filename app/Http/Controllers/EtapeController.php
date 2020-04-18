@@ -3,16 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Etape;
+use App\Models\Voyage;
 use Illuminate\Http\Request;
 
 class EtapeController extends Controller
 {
     public function index() {
-        return Etape::orderBy('date_debut')->get();
+        $voyages = Voyage::pluck('id')->toArray();
+        return Etape::wherein('voyage_id', $voyages)->orderBy('date_debut')->get();
+    }
+
+    public function etapesByVoyageId($id) {
+        $voyages = Voyage::find($id);
+        $etapes = [];
+        if(!is_null($voyages)) {
+            $etapes = Etape::orderBy('date_debut')->where('voyage_id', '=', $id)->get();
+        }
+
+        return $etapes;
     }
 
     public function show($id) {
-        $etape = Etape::with(['depenses' => function($query){
+        $etape = Etape::with(['Depenses' => function($query){
             $query->with('CategorieDepense');
         }])->where('id', $id)->first();
 

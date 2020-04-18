@@ -12,7 +12,8 @@ class DepenseController extends Controller
     }
 
     public function show($id) {
-        $depense = Depense::with('CategorieDepense')->where('id', $id)->get();
+        $depense = Depense::with('CategorieDepense')
+            ->where('id', $id)->first();
 
         return $depense;
     }
