@@ -30,6 +30,7 @@ Route::group(['middleware' => 'api'], function(){
     Route::get('voyages', 'VoyageController@index');
     Route::get('voyages/{id}', 'VoyageController@show');
     Route::post('etapes', 'EtapeController@store');
+    Route::get('etapes', 'EtapeController@index');
 
     // etapes
     /*Route::post('etapes', 'EtapeController@store');Route::delete('etapes/{id}', 'EtapeController@delete');

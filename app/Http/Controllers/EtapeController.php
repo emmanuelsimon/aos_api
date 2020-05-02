@@ -10,9 +10,11 @@ use App\Http\Controllers\Auth;
 class EtapeController extends Controller
 {
     public function index() {
-        dd(Auth::check());
-        $voyages = Voyage::pluck('id')->toArray();
-        return Etape::wherein('voyage_id', $voyages)->orderBy('date_debut')->get();
+        $etapes = Etape::with('voyage')->get()->makeHidden('voyage');
+
+        return response()->json([
+            'data' => $etapes
+        ], 200);
     }
 
     public function etapesByVoyageId($id) {

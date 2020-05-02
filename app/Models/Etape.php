@@ -11,8 +11,14 @@ class Etape extends Model
 
     protected $fillable = ['name', 'lat', 'long', 'dateEtape', 'title', 'shortDescription', 'voyage_id'];
 
+    protected $appends = ['color'];
+
     public function Voyage() {
         return $this->belongsTo(Voyage::class);
+    }
+
+    public function getColorAttribute() {
+        return $this->voyage->color;
     }
 
 }
