@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddsApiTokenToUsersTable extends Migration
+class AddColumnDureeTableEtapes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddsApiTokenToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('api_token')->nullable();
+        Schema::table('etapes', function(Blueprint $table){
+            $table->integer('duree')->nullable();
         });
     }
 
@@ -25,8 +25,6 @@ class AddsApiTokenToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

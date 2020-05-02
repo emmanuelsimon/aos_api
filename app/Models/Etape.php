@@ -9,11 +9,7 @@ class Etape extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['description', 'lat', 'long', 'step'];
-
-    public function Depenses() {
-        return $this->hasMany(Depense::class, 'etape_id');
-    }
+    protected $fillable = ['name', 'lat', 'long', 'dateEtape', 'title', 'shortDescription', 'voyage_id'];
 
     public function Voyage() {
         return $this->belongsTo(Voyage::class);

@@ -15,11 +15,17 @@ class CreateEtapesTable extends Migration
     {
         Schema::create('etapes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('description');
-            $table->decimal('lat',10, 7);
-            $table->decimal('long', 10,7);
-            $table->integer('step')->nullable();
             $table->timestamps();
+            $table->string('name');
+            $table->date('dateEtape');
+            $table->string('title');
+            $table->string('shortDescription')->nullable();
+            $table->unsignedInteger('voyage_id');
+            $table->foreign('voyage_id')
+                ->references('id')
+                ->on('voyages')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

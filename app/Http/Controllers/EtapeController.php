@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Etape;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth;
 
 class EtapeController extends Controller
 {
     public function index() {
+        dd(Auth::check());
         $voyages = Voyage::pluck('id')->toArray();
         return Etape::wherein('voyage_id', $voyages)->orderBy('date_debut')->get();
     }
@@ -32,6 +34,9 @@ class EtapeController extends Controller
     }
 
     public function store(Request $request) {
+        if(is_null($request->user('api'))){
+            return response()->json([], 401);
+        }
         $inputs = $request->input();
         if(!isset($inputs['id']) || is_null($inputs['id'])){
             $etape = New Etape();
@@ -39,11 +44,14 @@ class EtapeController extends Controller
             $etape = Etape::find($inputs['id']);
         }
 
-        $etape->description = $inputs['description'];
+        $etape->name = $inputs['name'];
+        $etape->title = $inputs['title'];
         $etape->lat = $inputs['lat'];
         $etape->long = $inputs['long'];
-        $etape->nbr_nuit = $inputs['nbr_nuit'];
-        $etape->date_debut = $inputs['date_debut'];
+        $etape->duree = $inputs['duree'];
+        $etape->dateEtape = $inputs['dateEtape'];
+        $etape->voyage_id = $inputs['voyage_id'];
+        $etape->shortDescription = $inputs['shortDescription'];
         $etape->save();
 
         return $etape;

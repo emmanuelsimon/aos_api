@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategorieDepensesTable extends Migration
+class AddSoftDeleteTableEtapes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateCategorieDepensesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categorie_depenses', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('Libelle');
-            $table->timestamps();
+        Schema::table('etapes', function(Blueprint $table){
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +25,6 @@ class CreateCategorieDepensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categorie_depenses');
+
     }
 }

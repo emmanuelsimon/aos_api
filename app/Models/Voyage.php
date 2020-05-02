@@ -9,7 +9,7 @@ class Voyage extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'date_debut'];
+    //protected $fillable = ['title', 'date_debut'];
 
     public function etapes() {
         return $this->hasMany(Etape::class);

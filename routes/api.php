@@ -15,32 +15,40 @@ use Illuminate\Http\Request;
 
 Route::post('login', 'API\UserController@userLogin');
 Route::post('register', 'API\UserController@userRegister');
-Route::get('etapes', 'EtapeController@index');
+/*Route::get('etapes', 'EtapeController@index');
 Route::get('etapes/{id}/voyage', 'EtapeController@etapesByVoyageId');
 Route::get('voyages', 'VoyageController@index');
 Route::get('voyages/{id}', 'VoyageController@show');
+Route::get('depenses', 'DepenseController@index');
+Route::get('depenses/{id}', 'DepenseController@show');
+Route::get('etapes/{id}', 'EtapeController@show');
+*/
 
-Route::group(['middleware' => 'auth:api'], function(){
+
+Route::group(['middleware' => 'api'], function(){
+    Route::post('voyages', 'VoyageController@store');
+    Route::get('voyages', 'VoyageController@index');
+    Route::get('voyages/{id}', 'VoyageController@show');
+    Route::post('etapes', 'EtapeController@store');
+
     // etapes
-    Route::post('etapes', 'EtapeController@store');
-    Route::get('etapes/{id}', 'EtapeController@show');
-    Route::delete('etapes/{id}', 'EtapeController@delete');
+    /*Route::post('etapes', 'EtapeController@store');Route::delete('etapes/{id}', 'EtapeController@delete');
     Route::put('etapes/{id}', 'EtapeController@update');
-    Route::post('etapes', 'EtapeController@store');
     // categorie depenses
     Route::get('categorieDepense', 'CategorieDepenseController@index');
     // depenses
     Route::post('depenses', 'DepenseController@store');
-    Route::get('depenses', 'DepenseController@index');
-    Route::get('depenses/{id}', 'DepenseController@show');
     //Route::delete('depenses/{id}', 'DepenseController@delete');
     Route::put('depenses/{id}', 'DepenseController@update');
     // voyages
     Route::put('voyages/{id}/restore', 'VoyageController@restore');
     Route::post('voyages', 'VoyageController@store');
-    Route::delete('voyages/{id}', 'VoyageController@delete');
+    Route::delete('voyages/{id}', 'VoyageController@delete');*/
 });
 
+Route::group(['middleware' => 'api'], function() {
+    Route::post('voyages', 'VoyageController@store');
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
